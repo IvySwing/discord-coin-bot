@@ -5,7 +5,7 @@ const eco = require('../ecoDB');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('balance')
-		.setDescription('Gives you the balance of coins in your bank'),
+		.setDescription('Gives you the balance of coins'),
 	async execute(interaction) {
 		const { guild, member } = interaction;
 		const balance = eco.balance.get(member.id, guild.id);
