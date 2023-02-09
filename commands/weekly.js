@@ -5,7 +5,7 @@ const eco = require('../ecoDB');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('weekly')
-		.setDescription('Claim your weekly reward'),
+		.setDescription('Claim your weekly divination'),
 	async execute(interaction) {
 		const { guild, member } = interaction;
 		const weekly = eco.rewards.getWeekly(member.id, guild.id);
@@ -13,15 +13,15 @@ module.exports = {
 
 		if (!weekly.status) {
 			const embedNoWoeekly = new EmbedBuilder()
-				.setDescription(`You have already claimed your weekly reward!  You have to wait ${time} to claim again`)
+				.setDescription(`You have already claimed your weekly pages!  You have to wait ${time} to claim again`)
 				.setColor('c3b4f7')
 				.setTimestamp();
 			return interaction.reply({ embeds: [embedNoWoeekly] });
 		}
 
 		const embedWeekly = new EmbedBuilder()
-			.setTitle('Weekly Reward')
-			.setDescription(`You have received \`${weekly.reward} coins\``)
+			.setTitle('Exploration and Explore')
+			.setDescription(`You have received \`${weekly.reward} pages 📜\``)
 			.setColor('c3b4f7')
 			.setTimestamp();
 		return interaction.reply({ embeds: [embedWeekly] });

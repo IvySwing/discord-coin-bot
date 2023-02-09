@@ -4,7 +4,7 @@ const eco = require('../ecoDB');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('work')
+		.setName('seek')
 		.setDescription('Claim your work reward'),
 	async execute(interaction) {
 		const { guild, member } = interaction;
@@ -20,8 +20,8 @@ module.exports = {
 		}
 
 		const embedWork = new EmbedBuilder()
-			.setTitle('Work Reward')
-			.setDescription(`You have received \`${work.reward} coins\``)
+			.setTitle('Seek Reward')
+			.setDescription(`You have received \`${work.reward} pages 📜\``)
 			.setColor('c3b4f7')
 			.setTimestamp();
 		return interaction.reply({ embeds: [embedWork] });
