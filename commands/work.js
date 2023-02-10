@@ -5,25 +5,22 @@ const eco = require('../ecoDB');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('seek')
-		.setDescription('Claim your work reward'),
+		.setDescription('Engage in a brief search within the library stacks for lost pages.'),
 	async execute(interaction) {
 		const { guild, member } = interaction;
 		const work = eco.rewards.getWork(member.id, guild.id);
-		const time = eco.rewards.getWork(member.id, guild.id).cooldown.pretty;
+		// const time = eco.rewards.getWork(member.id, guild.id).cooldown.pretty;
 
 		if (!work.status) {
 			const embedNoWork = new EmbedBuilder()
-				.setDescription(`You have already claimed your work reward!  You have to wait ${time} to claim again`)
-				.setColor('c3b4f7')
-				.setTimestamp();
+				.setDescription('Unfortunately, your search has not produced...ahem...results... Come back at the appropriate time to try the stacks again, perhaps you’ll feel a bit more refreshed.')
+				.setColor('c3b4f7');
 			return interaction.reply({ embeds: [embedNoWork] });
 		}
 
 		const embedWork = new EmbedBuilder()
-			.setTitle('Seek Reward')
-			.setDescription(`You have received \`${work.reward} pages 📜\``)
-			.setColor('c3b4f7')
-			.setTimestamp();
+			.setDescription(`It appears that your search has not been in vain. I thank you my friend. You have collected \`${work.reward} pages 📜\`. Come back in another hour to seek within the stacks once more.`)
+			.setColor('c3b4f7');
 		return interaction.reply({ embeds: [embedWork] });
 	},
 };
