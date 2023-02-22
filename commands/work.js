@@ -4,8 +4,8 @@ const eco = require('../ecoDB');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('seek')
-		.setDescription('Engage in a brief search within the library stacks for lost pages.'),
+		.setName('work')
+		.setDescription('Redeem your work reward.'),
 	async execute(interaction) {
 		const { guild, member } = interaction;
 		const work = eco.rewards.getWork(member.id, guild.id);
@@ -13,14 +13,14 @@ module.exports = {
 
 		if (!work.status) {
 			const embedNoWork = new EmbedBuilder()
-				.setDescription('Unfortunately, your search has not produced...ahem...results... Come back at the appropriate time to try the stacks again, perhaps you’ll feel a bit more refreshed.')
+				.setDescription('You already claimed your work reward. Come back in an hour!')
 				.setColor('c3b4f7');
-			return interaction.reply({ embeds: [embedNoWork] });
+			await interaction.reply({ embeds: [embedNoWork] });
 		}
 
 		const embedWork = new EmbedBuilder()
-			.setDescription(`It appears that your search has not been in vain. I thank you my friend. You have collected \`${work.reward} pages 📜\`. Come back in another hour to seek within the stacks once more.`)
+			.setDescription(`You have collected \`${work.reward} coins!`)
 			.setColor('c3b4f7');
-		return interaction.reply({ embeds: [embedWork] });
+		await interaction.reply({ embeds: [embedWork] });
 	},
 };

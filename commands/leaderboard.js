@@ -6,7 +6,7 @@ const eco = require('../ecoDB');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('leaderboard')
-		.setDescription('Politely request that Archivist Nebo retrieve the records of The Society’s top archival researchers.'),
+		.setDescription('Displays the leaderboard'),
 	async execute(interaction) {
 		const { guild } = interaction;
 		const leaderboard = eco.balance.leaderboard(guild.id, options);
@@ -17,15 +17,15 @@ module.exports = {
 			const embedNoLeader = new EmbedBuilder()
 				.setDescription(`${username}, there are no users on the leaderboard`)
 				.setColor('c3b4f7');
-			return interaction.reply({ embeds: [embedNoLeader] });
+			await interaction.reply({ embeds: [embedNoLeader] });
 		}
 
 		const embedLeader = new EmbedBuilder()
-			.setTitle('Records? Yes of course.')
+			.setTitle('Leaderboard')
 			.setDescription(`${leaderboard
 				.map((lb, index) => `${index + 1} - <@${lb.userID}> - **${lb.money}** coins`)
 				.join('\n')}`)
 			.setColor('c3b4f7');
-		return interaction.reply({ embeds: [embedLeader] });
+		await interaction.reply({ embeds: [embedLeader] });
 	},
 };
