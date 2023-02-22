@@ -1,9 +1,12 @@
-const Economy = require('discord-economy-super');
+const Economy = require('discord-economy-super/mongodb');
 
 let eco = new Economy({
-	storagePath: './storage.json',
-	updateCountdown: 1000,
-	checkStorage: true,
+	connection: {
+		connectionURI: '',
+		collectionName: '',
+		dbName: '',
+		mongoClientOptions: {},
+	},
 	deprecationWarnings: true,
 	sellingItemPercent: 75,
 	savePurchasesHistory: true,
@@ -34,7 +37,7 @@ let eco = new Economy({
 });
 
 
-eco.on('ready', economy => {
+eco.on('ready', async economy => {
 	eco = economy;
 	console.log('Economy is ready!');
 });

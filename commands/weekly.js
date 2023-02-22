@@ -8,7 +8,7 @@ module.exports = {
 		.setDescription('Redeem your weekly reward.'),
 	async execute(interaction) {
 		const { guild, member } = interaction;
-		const weekly = eco.rewards.getWeekly(member.id, guild.id);
+		const weekly = await eco.rewards.getWeekly(member.id, guild.id);
 		// const time = eco.rewards.getWeekly(member.id, guild.id).cooldown.pretty;
 
 		if (!weekly.status) {

@@ -9,7 +9,7 @@ module.exports = {
 		.setDescription('Displays the leaderboard'),
 	async execute(interaction) {
 		const { guild } = interaction;
-		const leaderboard = eco.balance.leaderboard(guild.id, options);
+		const leaderboard = await eco.balance.leaderboard(guild.id, options);
 		const username = interaction.user.username;
 		// const name = interaction.member.guild.name;
 
